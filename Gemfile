@@ -28,8 +28,8 @@ group :development do
 end
 
 gem 'bootstrap', '~> 4.0.0.alpha6'
-gem 'high_voltage'
 gem 'jquery-rails'
 gem 'pg'
 gem 'therubyracer', :platform=>:ruby
 gem 'devise'
+gem "paperclip", "~> 5.0.0"
