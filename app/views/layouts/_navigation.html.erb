@@ -21,7 +21,7 @@
 
             <% if current_user %>
               <li class="nav-item">
-                <%= link_to "My Profile", edit_user_registration_path(current_user), class: "btn btn-outline-success my-2 my-sm-0"%>
+                <%= link_to "My Profile", edit_user_registration_path, class: "btn btn-outline-success my-2 my-sm-0"%>
               </li>
               <li class="nav-item">
                 <%= link_to "Sign Out", destroy_user_session_path, class: "btn btn-outline-danger my-2 my-sm-0", method: :delete %>
