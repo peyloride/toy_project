@@ -1,2 +1,39 @@
-<h1>Toys#show</h1>
-<p>Find me in app/views/toys/show.html.erb</p>
+<div class="jumbotron">
+  <div class="row">
+
+    <div class="col-xs-12 col-lg-8">
+      <div class="card">
+        <%= image_tag @toy.image.url(:large) %>
+        <div class="card-body">
+          <h3 class="card-title"><%= @toy.name %></h3>
+          <p class="card-text"><%= @toy.description %></p>
+        </div>
+        <div class="card-body">
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-lg-4">
+      <h4 class="text-center">Owner of this Toy</h4>
+      <div class="card">
+        <%= image_tag @toy.user.avatar.url(:medium), class: "card-img-top" %>
+        <div class="card-body">
+          <h4 class="card-title"><%= @toy.user.first_name + " " + @toy.user.last_name %></h4>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Email: <%= @toy.user.email %></li>
+          <li class="list-group-item">Dapibus ac facilisis in</li>
+          <li class="list-group-item">Vestibulum at eros</li>
+        </ul>
+        <div class="card-body">
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
