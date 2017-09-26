@@ -1,57 +1,39 @@
 <section class="jumbotron text-center">
   <div class="container">
-    <h1 class="jumbotron-heading">Album example</h1>
-    <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
-    <p>
-      <a href="#" class="btn btn-primary">Main call to action</a>
-      <a href="#" class="btn btn-secondary">Secondary action</a>
-    </p>
+    <h1 class="jumbotron-heading">Toy Project</h1>
+    <p class="lead text-muted">Just borrow a Toy from someone else!</p>
+    <p class="lead text-muted">Let's start!</p>
+    <% if current_user.nil? %>
+      <p>
+        <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary" %>
+        <%= link_to "Sign In", new_user_session_path, class: "btn btn-secondary" %>
+      </p>
+    <% else %>
+      <p>
+        <%= link_to "Add new Toy", new_toy_path, class: "btn btn-outline-primary" %>
+        <%= link_to "My Toys", toys_path, class: "btn btn-outline-secondary" %>
+      </p>
+    <% end %>
   </div>
 </section>
 
 
+<h3>Latest Toys</h3>
 <div class="album text-muted">
   <div class="container">
-
     <div class="row">
-      <div class="card">
-        <img data-src="holder.js/100px280/thumb" alt="Card image cap">
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-      <div class="card">
-        <img data-src="holder.js/100px280/thumb" alt="Card image cap">
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-      <div class="card">
-        <img data-src="holder.js/100px280/thumb" alt="Card image cap">
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-
-      <div class="card">
-        <img data-src="holder.js/100px280/thumb" alt="Card image cap">
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-      <div class="card">
-        <img data-src="holder.js/100px280/thumb" alt="Card image cap">
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-      <div class="card">
-        <img data-src="holder.js/100px280/thumb" alt="Card image cap">
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-
-      <div class="card">
-        <img data-src="holder.js/100px280/thumb" alt="Card image cap">
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-      <div class="card">
-        <img data-src="holder.js/100px280/thumb" alt="Card image cap">
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
-      <div class="card">
-        <img data-src="holder.js/100px280/thumb" alt="Card image cap">
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      </div>
+      <% @toys.each do |toy| %>
+        <div class="card" style="width: 33.333%;">
+          <%= image_tag toy.image.url(:medium), alt: "#{toy.toy_type.humanize}" %>
+          <div class="text-center">
+            <h4><%= toy.name %></h4>
+            <p class="card-text text-justify">
+              <%= toy.description[0..100] + "..."%>
+            </p>
+          </div>
+          <%= link_to "Details", toy_path(toy), class: "btn btn-outline-primary" %>
+        </div>
+      <% end %>
     </div>
 
   </div>

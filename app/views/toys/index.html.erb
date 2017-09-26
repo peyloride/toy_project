@@ -26,6 +26,9 @@
           <%= link_to "Details", toy_path(toy), class: "btn btn-outline-primary" %>
         </div>
       <% end %>
+      <% if @toys.nil? %>
+        There is nothing to see here, yet.
+      <% end %>
     </div>
 
   </div>
