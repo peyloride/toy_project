@@ -1,12 +1,13 @@
 class ToysController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_toy, only: [:show, :edit, :update, :destroy]
+  before_action :set_toy, only: [:edit, :update, :destroy]
 
   def index
     @toys = Toy.all
   end
 
   def show
+    @toy = Toy.find(params[:id])
   end
 
   def new
@@ -42,7 +43,7 @@ class ToysController < ApplicationController
 
   private
     def set_toy
-      @toy = Toy.find(params[:id])
+      @toy = current_user.toys.find(params[:id])
     end
 
     def toy_params
