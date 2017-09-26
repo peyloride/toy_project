@@ -1,15 +1,14 @@
-<% @toys.each do |toy| %>
-  <div class="card" style="width: 33.333%;">
-    <%= image_tag toy.image.url(:medium), alt: "#{toy.toy_type.humanize}" %>
-    <div class="text-center">
-      <h4><%= toy.name %></h4>
-      <p class="card-text text-justify">
-        <%= toy.description[0..100] + "..."%>
-      </p>
+<div class="card-columns">
+  <% @toys.each do |toy| %>
+    <div class="card border-secondary mb-3" style="max-width: 20rem;">
+      <%= image_tag toy.image.url(:medium), alt: "#{toy.toy_type.humanize}", class: "card-img-top" %>
+      <div class="card-body">
+        <h4 class="card-title"><%= toy.name %></h4>
+        <p class="card-text"><%= toy.description[0..100] + "..."%></p>
+      </div>
+      <div class="card-footer">
+        <%= link_to "Details", toy_path(toy), class: "btn btn-block btn-outline-primary" %>
+      </div>
     </div>
-    <%= link_to "Details", toy_path(toy), class: "btn btn-outline-primary" %>
-  </div>
-<% end %>
-<% if @toys.nil? %>
-  There is nothing to see here, yet.
-<% end %>
+  <% end %>
+</div>

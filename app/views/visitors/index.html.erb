@@ -22,18 +22,7 @@
 <div class="album text-muted">
   <div class="container">
     <div class="row">
-      <% @toys.each do |toy| %>
-        <div class="card" style="width: 33.333%;">
-          <%= image_tag toy.image.url(:medium), alt: "#{toy.toy_type.humanize}" %>
-          <div class="text-center">
-            <h4><%= toy.name %></h4>
-            <p class="card-text text-justify">
-              <%= toy.description[0..100] + "..."%>
-            </p>
-          </div>
-          <%= link_to "Details", toy_path(toy), class: "btn btn-outline-primary" %>
-        </div>
-      <% end %>
+      <%= render 'toys/toy_card', toys: @toys %>
     </div>
 
   </div>
