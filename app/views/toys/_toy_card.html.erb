@@ -9,7 +9,9 @@
       <div class="card-footer">
         <%= link_to "Details", toy_path(toy), class: "btn btn-block btn-outline-primary" %>
         <% if is_lendable(toy) %>
-        <%= link_to "Borrow", toy_lend_path(toy), method: :post, class: "btn btn-block btn-outline-secondary" %>
+          <%= link_to "Borrow", toy_lend_path(toy), method: :post, class: "btn btn-block btn-outline-secondary" %>
+        <% else %>
+          <small class="text-muted">Sorry, already borrowed from someone else.</small>
         <% end %>
       </div>
     </div>
