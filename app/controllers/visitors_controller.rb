@@ -1,5 +1,5 @@
 class VisitorsController < ApplicationController
   def index
-    @toys = Toy.take(6)
+    @toys = Toy.order('id DESC').last(6)
   end
 end
