@@ -9,9 +9,10 @@
           <p class="card-text"><%= @toy.description %></p>
         </div>
         <div class="card-body">
-          <%= link_to "Edit", edit_toy_path(@toy), class: "btn btn-primary" %>
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
+          <% if user_allowed %>
+            <%= link_to "Edit", edit_toy_path(@toy), class: "btn btn-primary" %>
+            <%= link_to "Destroy", toy_path(@toy), method: :delete, confirm: 'Are you sure?', class: "btn btn-danger"   %>
+          <% end %>
         </div>
       </div>
     </div>
