@@ -8,6 +8,7 @@
       </div>
       <div class="card-footer">
         <%= link_to "Details", toy_path(toy), class: "btn btn-block btn-outline-primary" %>
+        <%= link_to "Borrow", toy_lend_path(toy), method: :post, class: "btn btn-block btn-outline-secondary" %>
       </div>
     </div>
   <% end %>
