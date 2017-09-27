@@ -3,7 +3,8 @@
     <div class="card border-secondary mb-3" style="max-width: 20rem;">
       <%= image_tag toy.image.url(:medium), alt: "#{toy.toy_type.humanize}", class: "card-img-top" %>
       <div class="card-body">
-        <h4 class="card-title"><%= toy.name %></h4>
+        <h3 class="card-title"><%= toy.name %></h3>
+        <h6 class="card-title"> <%= toy.toy_type.humanize %> </h6>
         <p class="card-text"><%= toy.description[0..100] + "..."%></p>
       </div>
       <div class="card-footer">
@@ -11,7 +12,7 @@
         <% if is_lendable(toy) %>
           <%= link_to "Borrow", toy_lend_path(toy), method: :post, class: "btn btn-block btn-outline-secondary" %>
         <% else %>
-          <small class="text-muted">Sorry, already borrowed from someone else.</small>
+          <small class="text-muted"><%= next_lend_time(toy) %></small>
         <% end %>
       </div>
     </div>
