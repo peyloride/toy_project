@@ -21,8 +21,6 @@ module ToysHelper
 
     if @lend.present?
       "Sorry, already borrowed from someone else. Can't borrowed again until, #{(@lend.last.created_at + 1.month).strftime('%Y-%m-%d')}"
-    else
-      "You can't lend your toy."
     end
   end
 end
