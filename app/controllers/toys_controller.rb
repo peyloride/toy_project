@@ -24,15 +24,11 @@ class ToysController < ApplicationController
   def lend
     @toy = Toy.find(params[:toy_id])
     @lend = Lend.new(owner_id: @toy.user.id, borrower_id: current_user.id, toy_id: @toy.id)
-    puts "hebee"
 
     if !Lend.where(toy_id: @toy.id).nil? || Lend.where(toy_id: @toy.id).last.created_at < 1.month.ago
-      puts "1"
       if @lend.save
-        puts "2"
         redirect_to @toy, notice: "Toy lended successfully"
       else
-        puts "3"
         redirect_to toys_path, notice: "You cant lend that item right now"
       end
     end
