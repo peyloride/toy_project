@@ -1,5 +1,6 @@
 class Toy < ApplicationRecord
   belongs_to :user
+  has_many :lends
 
   has_attached_file :image, styles: { large: "700x700", medium: "x300>", thumb: "100x100>" }
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
