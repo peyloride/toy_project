@@ -12,6 +12,7 @@ class ToysController < ApplicationController
 
   def show
     @toy = Toy.find(params[:id])
+    @lends = Lend.where(toy_id: @toy.id, is_accepted: nil)
   end
 
   def new
@@ -19,19 +20,6 @@ class ToysController < ApplicationController
   end
 
   def edit
-  end
-
-  def lend
-    @toy = Toy.find(params[:toy_id])
-    @lend = Lend.new(owner_id: @toy.user.id, borrower_id: current_user.id, toy_id: @toy.id)
-
-    if !Lend.where(toy_id: @toy.id).nil? || Lend.where(toy_id: @toy.id).last.created_at < 1.month.ago
-      if @lend.save
-        redirect_to @toy, notice: "Toy lended successfully"
-      else
-        redirect_to toys_path, notice: "You cant lend that item right now"
-      end
-    end
   end
 
   def create
