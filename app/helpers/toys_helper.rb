@@ -1,26 +1,29 @@
 module ToysHelper
   def is_lendable(toy)
-    @lend = Lend.where(toy_id: toy.id)
+    @lends = Lend.where(toy_id: toy.id)
 
-    if @lend.present?
-      if (@lend.last.created_at < 1.month.ago) && (toy.user_id != current_user.id)
-        return true
-      else
-        return false
-      end
-    else
-      if toy.user_id != current_user.id
-        return true
-      end
+    if toy.user_id == current_user.id
+      return false
     end
-    return false
+
+    if @lends.present?
+      @lends.each do |lend|
+        if lend.is_accepted == true
+          return false
+        end
+      end
+      return true
+    else
+      return true
+    end
   end
 
   def next_lend_time(toy)
-    @lend = Lend.where(toy_id: toy.id)
+    @lends = Lend.where(toy_id: toy.id, is_accepted: true)
 
-    if @lend.present?
-      "Sorry, already borrowed from someone else. Can't borrowed again until, #{(@lend.last.created_at + 1.month).strftime('%Y-%m-%d')}"
+    if @lends.present?
+      "Sorry, already borrowed from someone else. Can't borrowed again until, #{(@lends.last.created_at + 1.month).strftime('%d-%m-%Y')}"
     end
+
   end
 end
