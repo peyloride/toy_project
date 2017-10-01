@@ -1,5 +1,5 @@
 <div class="card-columns">
-  <% @toys.each do |toy| %>
+  <% toys.each do |toy| %>
     <div class="card border-secondary mb-3" style="max-width: 20rem;">
       <%= image_tag toy.image.url(:medium), alt: "#{toy.toy_type.humanize}", class: "card-img-top" %>
       <div class="card-body">
@@ -10,7 +10,7 @@
       <div class="card-footer">
         <%= link_to "Details", toy_path(toy), class: "btn btn-block btn-outline-primary" %>
         <% if is_lendable(toy) %>
-          <%= link_to "Borrow", toy_lend_path(toy), method: :post, class: "btn btn-block btn-outline-secondary" %>
+          <%= link_to "Send Borrow Request", toy_request_lend_path(toy), method: :post, class: "btn btn-block btn-outline-secondary" %>
         <% else %>
           <small class="text-muted"><%= next_lend_time(toy) %></small>
         <% end %>

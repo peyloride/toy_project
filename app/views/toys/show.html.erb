@@ -12,9 +12,18 @@
           <% if user_allowed %>
             <%= link_to "Edit", edit_toy_path(@toy), class: "btn btn-primary" %>
             <%= link_to "Destroy", toy_path(@toy), method: :delete, confirm: 'Are you sure?', class: "btn btn-danger"   %>
+            <% if @lends.present? %>
+              <h4> Pending Lend Requests </h4>
+              <% @lends.each do |lend| %>
+                <h4 class="card-text"><%= full_user_name(User.find(lend.borrower_id)) %></h4>
+                <p class="card-text"><%= lend.created_at %></p>
+                <%= link_to "Accept", toy_accept_lend_path(@toy, lend_id: lend.id), method: :post, class: "btn btn-info"  %>
+                <%= link_to "Refuse", toy_refuse_lend_path(@toy, lend_id: lend.id), method: :post, class: "btn btn-danger" %>
+              <% end %>
+            <% end %>
           <% end %>
           <% if is_lendable(@toy) %>
-            <%= link_to "Borrow", toy_lend_path(@toy), method: :post, class: "btn btn-block btn-outline-secondary" %>
+            <%= link_to "Send Borrow Request", toy_request_lend_path(@toy), method: :post, class: "btn btn-block btn-outline-secondary" %>
           <% else %>
             <small class="text-muted"><%= next_lend_time(@toy) %></small>
           <% end %>
@@ -27,7 +36,7 @@
       <div class="card">
         <%= image_tag @toy.user.avatar.url(:medium), class: "card-img-top" %>
         <div class="card-body">
-          <h4 class="card-title"><%= @toy.user.first_name + " " + @toy.user.last_name %></h4>
+          <h4 class="card-title"><%= full_user_name(@toy.user) %></h4>
           <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
         </div>
         <ul class="list-group list-group-flush">
