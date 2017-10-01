@@ -1,0 +1,38 @@
+<section class="jumbotron text-center">
+  <div class="container">
+    <h1 class="jumbotron-heading">My Lends List</h1>
+  </div>
+</section>
+
+
+<div class="album text-muted">
+  <div class="container">
+
+    <h3>Pending Lends</h3>
+    <div class="row">
+      <% if @pending_toys.present? %>
+        <%= render 'toys/toy_card', toys: @pending_toys %>
+      <% else %>
+        <p>There's nothing to show.</p>
+      <% end %>
+    </div>
+
+    <h3>Refused Lends</h3>
+    <div class="row">
+      <% if @refused_toys.present? %>
+        <%= render 'toys/toy_card', toys: @refused_toys %>
+      <% else %>
+        <p>There's nothing to show.</p>
+      <% end %>
+    </div>
+
+    <h3>Accepted Lends</h3>
+    <div class="row">
+      <% if @accepted_toys.present? %>
+        <%= render 'toys/toy_card', toys: @accepted_toys %>
+      <% else %>
+        <p>There's nothing to show.</p>
+      <% end %>
+    </div>
+  </div>
+</div>
