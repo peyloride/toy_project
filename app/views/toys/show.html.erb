@@ -10,16 +10,25 @@
         </div>
         <div class="card-body">
           <% if user_allowed %>
-            <%= link_to "Edit", edit_toy_path(@toy), class: "btn btn-primary" %>
-            <%= link_to "Destroy", toy_path(@toy), method: :delete, confirm: 'Are you sure?', class: "btn btn-danger"   %>
+            <p class="card-text">
+              <%= link_to "Edit", edit_toy_path(@toy), class: "btn btn-primary" %>
+              <%= link_to "Destroy", toy_path(@toy), method: :delete, confirm: 'Are you sure?', class: "btn btn-danger"   %>
+            </p>
             <% if @lends.present? %>
               <h4> Pending Lend Requests </h4>
-              <% @lends.each do |lend| %>
-                <h4 class="card-text"><%= full_user_name(User.find(lend.borrower_id)) %></h4>
-                <p class="card-text"><%= lend.created_at %></p>
-                <%= link_to "Accept", toy_accept_lend_path(@toy, lend_id: lend.id), method: :post, class: "btn btn-info"  %>
-                <%= link_to "Refuse", toy_refuse_lend_path(@toy, lend_id: lend.id), method: :post, class: "btn btn-danger" %>
-              <% end %>
+              <div class="row">
+                <% @lends.each do |lend| %>
+                  <div class="col-xs-6 col-md-4 col-lg-4">
+                    <%= image_tag User.find(lend.borrower_id).avatar.url(:thumb) %>
+                    <h5 class="card-text"><%= full_user_name(User.find(lend.borrower_id)) %></h5>
+                    <small class="card-text"><%= lend.created_at.strftime('%d-%m-%Y') %></small>
+                    <p class="card-text">
+                      <%= link_to "Accept", toy_accept_lend_path(@toy, lend_id: lend.id), method: :post, class: "btn btn-info"  %>
+                      <%= link_to "Refuse", toy_refuse_lend_path(@toy, lend_id: lend.id), method: :post, class: "btn btn-danger" %>
+                    </p>
+                  </div>
+                <% end %>
+              </div>
             <% end %>
           <% end %>
           <% if is_lendable(@toy) %>
