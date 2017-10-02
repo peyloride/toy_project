@@ -33,3 +33,4 @@ gem 'pg'
 gem 'therubyracer', :platform=>:ruby
 gem 'devise'
 gem "paperclip", "~> 5.0.0"
+gem 'aws-sdk', '~> 2.3'
