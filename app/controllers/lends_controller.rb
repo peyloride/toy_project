@@ -1,4 +1,5 @@
 class LendsController < ApplicationController
+  before_action :authenticate_user!
 
   def lend_request
     @toy = Toy.find(params[:toy_id])
