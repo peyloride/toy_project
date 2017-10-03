@@ -9,7 +9,11 @@
   <div class="container">
 
     <div class="row">
-      <%= render 'toy_card', toys: @toys %>
+      <% if @toys.present? %>
+        <%= render 'toy_card', toys: @toys %>
+      <% else %>
+        <p class="text-center"> There is nothing to show in here, yet.</p>
+      <% end %>
     </div>
   </div>
 </div>
@@ -25,7 +29,11 @@
   <div class="container">
 
     <div class="row">
-      <%= render 'toy_card', toys: @lended_toys %>
+      <% if @lended_toys.present? %>
+        <%= render 'toy_card', toys: @lended_toys %>
+      <% else %>
+        <p class="text-center"> There is nothing to show in here, yet.</p>
+      <% end %>
     </div>
   </div>
 </div>
