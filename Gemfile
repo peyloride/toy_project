@@ -36,3 +36,5 @@ gem 'therubyracer', :platform=>:ruby
 gem 'devise'
 gem "paperclip", "~> 5.0.0"
 gem 'aws-sdk', '~> 2.3'
+gem 'acts_as_votable', '~> 0.10.0'
+gem "font-awesome-rails"

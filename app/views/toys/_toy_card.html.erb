@@ -6,6 +6,16 @@
         <h3 class="card-title"><%= toy.name %></h3>
         <h6 class="card-title"> <%= toy.toy_type.humanize %> </h6>
         <p class="card-text"><%= toy.description[0..100] + "..."%></p>
+        <p class="text-right">
+          <% if current_user.voted_for? toy %>
+            <i class="fa fa-heart" aria-hidden="true"></i>
+          <% else %>
+            <%= link_to toy_like_path(toy), method: :post do %>
+              <i class="fa fa-heart-o" aria-hidden="true"></i>
+            <% end %>
+          <% end %>
+            <%= toy.get_likes.size %>
+        </p>
       </div>
       <div class="card-footer">
         <%= link_to "Details", toy_path(toy), class: "btn btn-block btn-outline-primary" %>

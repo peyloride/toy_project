@@ -6,6 +6,12 @@ class ToysController < ApplicationController
     @toys = Toy.all
   end
 
+  def like
+    @toy = Toy.find(params[:toy_id])
+    current_user.likes @toy
+    redirect_back(fallback_location: root_path)
+  end
+
   def my_toys
     @toys = current_user.toys
     @lended_toys = Lend.where(borrower_id: current_user.id, is_accepted: true).map { |lend| lend.toy}
@@ -50,6 +56,10 @@ class ToysController < ApplicationController
     @toy.destroy
     redirect_to toys_path, notice: "Toy deleted successfully"
   end
+
+
+
+
 
   private
     def set_toy
