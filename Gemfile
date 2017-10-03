@@ -25,6 +25,8 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'better_errors'
   gem 'rails_layout'
+  gem 'pry'
+  gem 'pry-rails'
 end
 
 gem 'bootstrap', '~> 4.0.0.alpha6'
