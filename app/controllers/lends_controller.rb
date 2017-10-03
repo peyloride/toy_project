@@ -21,7 +21,7 @@ class LendsController < ApplicationController
       LendsCleanupJob.set(wait: 1.month).perform_later @lend.id
 
       #If one of lend request is accepted, other requests must be refused.
-      Lend.where(toy_id: @toy.id).each do |lend|
+      Lend.where(toy_id: @toy.id, is_accepted: nil).each do |lend|
         lend.update(is_accepted: false)
       end
 
