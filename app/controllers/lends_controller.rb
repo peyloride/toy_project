@@ -17,7 +17,14 @@ class LendsController < ApplicationController
     @lend = Lend.find(params[:lend_id])
 
     if @lend.update(is_accepted: true)
+      #Set cleaner job to make this toy available after 1 month
       LendsCleanupJob.set(wait: 1.month).perform_later @lend.id
+
+      #If one of lend request is accepted, other requests must be refused.
+      Lend.where(toy_id: @toy.id).each do |lend|
+        lend.update(is_accepted: false)
+      end
+
       redirect_to @toy, notice: "Lend request accepted successfully"
     else
       redirect_to toys_path, notice: "Something went wrong."
