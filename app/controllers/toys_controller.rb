@@ -14,6 +14,10 @@ class ToysController < ApplicationController
   def show
     @toy = Toy.find(params[:id])
     @lends = Lend.where(toy_id: @toy.id, is_accepted: nil)
+
+    if Lend.find_by(toy_id: @toy.id, is_accepted: true).present?
+      @lender = Lend.find_by(toy_id: @toy.id, is_accepted: true).lender
+    end
   end
 
   def new

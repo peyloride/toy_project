@@ -19,8 +19,8 @@
               <div class="row">
                 <% @lends.each do |lend| %>
                   <div class="col-xs-6 col-md-4 col-lg-4">
-                    <%= image_tag User.find(lend.borrower_id).avatar.url(:thumb) %>
-                    <h5 class="card-text"><%= full_user_name(User.find(lend.borrower_id)) %></h5>
+                    <%= image_tag lend.lender.avatar.url(:thumb) %>
+                    <h5 class="card-text"><%= full_user_name(lend.lender) %></h5>
                     <small class="card-text"><%= lend.created_at.strftime('%d-%m-%Y') %></small>
                     <p class="card-text">
                       <%= link_to "Accept", toy_accept_lend_path(@toy, lend_id: lend.id), method: :post, class: "btn btn-info"  %>
@@ -43,24 +43,41 @@
     </div>
 
     <div class="col-xs-12 col-lg-4">
-      <h4 class="text-center">Owner of this Toy</h4>
-      <div class="card">
-        <%= image_tag @toy.user.avatar.url(:medium), class: "card-img-top" %>
-        <div class="card-body">
-          <h4 class="card-title"><%= full_user_name(@toy.user) %></h4>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">Email: <%= @toy.user.email %></li>
-          <li class="list-group-item">Dapibus ac facilisis in</li>
-          <li class="list-group-item">Vestibulum at eros</li>
-        </ul>
-        <div class="card-body">
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
+      <div class="row">
+        <h4 class="text-center">Owner of this Toy</h4>
+        <div class="card">
+          <%= image_tag @toy.user.avatar.url(:medium), class: "card-img-top" %>
+          <div class="card-body">
+            <h4 class="card-title"><%= full_user_name(@toy.user) %></h4>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Email: <%= @toy.user.email %></li>
+          </ul>
+          <div class="card-body">
+            <a href="#" class="card-link">Card link</a>
+            <a href="#" class="card-link">Another link</a>
+          </div>
         </div>
       </div>
+      <% if @lender.present? %>
+        <div class="row">
+          <h4 class="text-center"> Current Lender </h4>
+          <div class="card">
+            <%= image_tag @lender.avatar.url(:medium), class: "card-img-top" %>
+            <div class="card-body">
+              <h4 class="card-title"><%= full_user_name(@lender) %></h4>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Lender Until: </li>
+              <li class="list-group-item">Email: <%= @lender.email %></li>
+            </ul>
+            <div class="card-body">
+              <a href="#" class="card-link">Card link</a>
+              <a href="#" class="card-link">Another link</a>
+            </div>
+          </div>
+        </div>
+      <% end %>
     </div>
-
   </div>
 </div>
