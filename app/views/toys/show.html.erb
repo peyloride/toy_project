@@ -78,7 +78,7 @@
               <h4 class="card-title"><%= full_user_name(@lender) %></h4>
             </div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item">Lender Until: </li>
+              <li class="list-group-item">Lender Until: <%= (@lend.updated_at + 1.month).strftime('%d-%m-%Y') %></li>
               <li class="list-group-item">Email: <%= @lender.email %></li>
             </ul>
             <div class="card-body">

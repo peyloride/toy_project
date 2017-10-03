@@ -23,6 +23,7 @@ class ToysController < ApplicationController
 
     if Lend.find_by(toy_id: @toy.id, is_accepted: true).present?
       @lender = Lend.find_by(toy_id: @toy.id, is_accepted: true).lender
+      @lend = Lend.find_by(toy_id: @toy.id, is_accepted: true)
     end
   end
 

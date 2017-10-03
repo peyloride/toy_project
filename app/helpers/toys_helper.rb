@@ -26,7 +26,7 @@ module ToysHelper
     @lends = Lend.where(toy_id: toy.id, is_accepted: true)
 
     if @lends.present?
-      "Sorry, already borrowed from someone else. Can't borrowed again until, #{(@lends.last.created_at + 1.month).strftime('%d-%m-%Y')}"
+      "Sorry, already borrowed from someone else. Can't borrowed again until, #{(@lends.last.updated_at + 1.month).strftime('%d-%m-%Y')}"
     end
 
   end
