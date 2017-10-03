@@ -37,23 +37,9 @@ class LendsController < ApplicationController
 
   def my_lends
     @pending_lends = Lend.where(owner_id: current_user.id, is_accepted: nil).uniq { |p| p.toy_id }
-    @pending_toys = []
-    if @pending_lends.present?
-      @pending_lends.each do |pending_lend|
-        @pending_toys << pending_lend.toy
-      end
-    end
-
-    @refused_lends = Lend.where(owner_id: current_user.id, is_accepted: false).uniq { |p| p.toy_id }
-    @refused_toys = []
-    @refused_lends.each do |refused_lend|
-      @refused_toys << refused_lend.toy
-    end
+    @pending_toys = @pending_lends.map { |lend| lend.toy }
 
     @accepted_lends = Lend.where(owner_id: current_user.id, is_accepted: true).uniq { |p| p.toy_id }
-    @accepted_toys = []
-    @accepted_lends.each do |accepted_lend|
-      @accepted_toys << accepted_lend.toy
-    end
+    @accepted_toys = @accepted_lends.map { |lend| lend.toy }
   end
 end

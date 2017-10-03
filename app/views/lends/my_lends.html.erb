@@ -17,15 +17,6 @@
       <% end %>
     </div>
 
-    <h3>Refused Lends</h3>
-    <div class="row">
-      <% if @refused_toys.present? %>
-        <%= render 'toys/toy_card', toys: @refused_toys %>
-      <% else %>
-        <p>There's nothing to show.</p>
-      <% end %>
-    </div>
-
     <h3>Accepted Lends</h3>
     <div class="row">
       <% if @accepted_toys.present? %>
