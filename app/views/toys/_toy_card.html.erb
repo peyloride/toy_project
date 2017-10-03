@@ -9,7 +9,9 @@
       </div>
       <div class="card-footer">
         <%= link_to "Details", toy_path(toy), class: "btn btn-block btn-outline-primary" %>
-        <% if is_lendable(toy) %>
+        <% if is_request_sent(toy) %>
+          <small class="text-center text-muted"> Your request has been sent already. </small>
+        <% elsif is_lendable(toy) %>
           <%= link_to "Send Borrow Request", toy_request_lend_path(toy), method: :post, class: "btn btn-block btn-outline-secondary" %>
         <% else %>
           <small class="text-muted"><%= next_lend_time(toy) %></small>
