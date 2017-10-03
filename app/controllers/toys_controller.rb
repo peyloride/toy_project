@@ -8,6 +8,7 @@ class ToysController < ApplicationController
 
   def my_toys
     @toys = current_user.toys
+    @lended_toys = Lend.where(borrower_id: current_user.id, is_accepted: true).map { |lend| lend.toy}
   end
 
   def show

@@ -19,9 +19,7 @@ module ToysHelper
   end
 
   def is_request_sent(toy)
-    if Lend.where(toy_id: toy.id, is_accepted: nil, borrower_id: current_user.id).present?
-      return true
-    end
+    Lend.where(toy_id: toy.id, is_accepted: nil, borrower_id: current_user.id).present?
   end
 
   def next_lend_time(toy)
