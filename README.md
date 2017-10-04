@@ -1,50 +1,42 @@
-Toy Project Bootstrapped
-================
+# Toy Project
 
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+## Summary
+A simple project for Job Interview  at Sigortaci123. Users can lend their toys to another users, likes and comment to toys. Every toy has 1 month expire time from their lend request accepted.
 
-This application was generated with the [rails_apps_composer](https://github.com/RailsApps/rails_apps_composer) gem
-provided by the [RailsApps Project](http://railsapps.github.io/).
+It uses Amazon S3 Bucket on Heroku app for storing images.
 
-Rails Composer is supported by developers who purchase our RailsApps tutorials.
+Deployed to heroku: [Heroku app link](https://toyprojecto.herokuapp.com)
 
-Problems? Issues?
------------
+## Development Environment Dependencies
+- Ruby 2.4+
+- Rails 5.1+
+- PostgreSQL 9.6.5+
 
-Need help? Ask on Stack Overflow with the tag 'railsapps.'
+## Usage
 
-Your application contains diagnostics in the README file. Please provide a copy of the README file when reporting any issues.
+1. Clone the repository to your machine.
+2. `cd PROJECT_NAME`
+3. Run `bundle install`
+4. Configure the database( run rails db:migrate )
+5. Run rails server
 
-If the application doesn't work as expected, please [report an issue](https://github.com/RailsApps/rails_apps_composer/issues)
-and include the diagnostics.
+## Contributing
 
-Ruby on Rails
--------------
+**Bug reports**
 
-This application requires:
+Please use the issue tracker to report any bugs.
 
-- Ruby 2.4.1
-- Rails 5.1.4
+**Developing**
 
-Learn more about [Installing Rails](http://railsapps.github.io/installing-rails.html).
+1. Create an issue and describe your idea
+2. Fork it
+3. Create your feature branch (git checkout -b my-new-feature)
+4. Commit your changes (git commit -m 'Add some feature')
+5. Publish the branch (git push origin my-new-feature)
+6. Create a Pull Request
 
-Getting Started
----------------
+## License
 
-Documentation and Support
--------------------------
+Released under the [MIT License](https://opensource.org/licenses/MIT).
 
-Issues
--------------
 
-Similar Projects
-----------------
-
-Contributing
-------------
-
-Credits
--------
-
-License
--------
