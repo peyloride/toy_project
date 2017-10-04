@@ -1,8 +1,9 @@
 class LendsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_toy
+  before_action :set_lend, only: [:accept, :refuse]
 
   def lend_request
-    @toy = Toy.find(params[:toy_id])
     @lend = Lend.new(owner_id: @toy.user.id, borrower_id: current_user.id, toy_id: @toy.id)
 
     if @lend.save
@@ -13,9 +14,6 @@ class LendsController < ApplicationController
   end
 
   def accept
-    @toy = Toy.find(params[:toy_id])
-    @lend = Lend.find(params[:lend_id])
-
     if @lend.update(is_accepted: true)
       #Set cleaner job to make this toy available after 1 month
       LendsCleanupJob.set(wait: 1.month).perform_later @lend.id
@@ -32,9 +30,6 @@ class LendsController < ApplicationController
   end
 
   def refuse
-    @toy = Toy.find(params[:toy_id])
-    @lend = Lend.where(toy_id: @toy.id, owner_id: current_user.id)
-
     if @lend.update(is_accepted: false)
       redirect_to @toy, notice: "Lend request accepted successfully"
     else
@@ -48,5 +43,15 @@ class LendsController < ApplicationController
 
     @accepted_lends = Lend.where(owner_id: current_user.id, is_accepted: true).uniq { |p| p.toy_id }
     @accepted_toys = @accepted_lends.map { |lend| lend.toy }
+  end
+
+  private
+
+  def set_toy
+    @toy = Toy.find(params[:toy_id])
+  end
+
+  def set_lend
+    @lend = Lend.find(params[:lend_id])
   end
 end
