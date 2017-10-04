@@ -8,6 +8,8 @@
           <h3 class="card-title"><%= @toy.name %></h3>
           <p class="card-text"><%= @toy.description %></p>
           <p class="text-right">
+            <i class="fa fa-comment" aria-hidden="true"></i>
+              <%= @toy.comments.size %>
             <% if current_user.voted_for? @toy %>
               <i class="fa fa-heart" aria-hidden="true"></i>
             <% else %>
@@ -91,3 +93,55 @@
     </div>
   </div>
 </div>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <h3>Comments</h3>
+    </div><!-- /col-sm-12 -->
+  </div><!-- /row -->
+  <% if @toy.comments.present? %>
+    <% @toy.comments.each do |comment| %>
+      <div class="row">
+        <div class="col-sm-2">
+          <div class="thumbnail">
+            <%= image_tag comment.user.avatar.url(:thumb) %>
+          </div><!-- /thumbnail -->
+        </div><!-- /col-sm-1 -->
+        <div class="col-sm-8">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <strong><%= full_user_name(comment.user) %></strong> <span class="text-muted"><%= time_ago_in_words(comment.created_at) %> ago</span>
+              <% if current_user.voted_for? comment %>
+                <i class="fa fa-heart" aria-hidden="true"></i>
+              <% else %>
+                <%= link_to toy_comment_like_path(@toy, comment), method: :post do %>
+                  <i class="fa fa-heart-o" aria-hidden="true"></i>
+                <% end %>
+              <% end %>
+                <%= comment.get_likes.size %>
+            </div>
+            <div class="panel-body">
+              <%= comment.body %>
+            </div><!-- /panel-body -->
+            <% if user_allowed_comment(comment) %>
+              <%= link_to "Delete", toy_comment_path(@toy, comment), method: :delete %>
+            <% end %>
+          </div><!-- /panel panel-default -->
+        </div><!-- /col-sm-5 -->
+      </div><!-- /row -->
+      <br>
+    <% end %>
+  <% else %>
+    There is nothing in here, yet.
+  <% end %>
+  <div class="row">
+    <div class="col-sm-12">
+      <hr>
+      <h5>New comment</h5>
+      <%= form_for [@toy, Comment.new] do |f| %>
+        <%= f.text_area :body, placeholder: "Add a comment", cols: 100 %><br/>
+        <%= f.submit "Add Comment" %>
+      <% end %>
+    </div>
+  </div>
+</div><!-- /container -->

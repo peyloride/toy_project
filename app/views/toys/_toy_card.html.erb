@@ -7,6 +7,8 @@
         <h6 class="card-title"> <%= toy.toy_type.humanize %> </h6>
         <p class="card-text"><%= toy.description[0..100] + "..."%></p>
         <p class="text-right">
+          <i class="fa fa-comment" aria-hidden="true"></i>
+              <%= toy.comments.size %>
           <% if current_user.voted_for? toy %>
             <i class="fa fa-heart" aria-hidden="true"></i>
           <% else %>

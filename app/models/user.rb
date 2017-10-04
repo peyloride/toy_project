@@ -11,4 +11,5 @@ class User < ApplicationRecord
 
   has_many :toys
   has_many :lends
+  has_many :comments
 end
