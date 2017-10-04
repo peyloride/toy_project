@@ -17,7 +17,9 @@ class CommentsController < ApplicationController
     @comment.user_id = current_user.id
 
     if @comment.save
-      redirect_back(fallback_location: root_path, notice: 'Your comment was successfully posted!')
+      respond_to do |format|
+         format.js
+      end
     else
       redirect_back(fallback_location: root_path, notice: "Your comment wasn't posted!")
     end
@@ -26,7 +28,9 @@ class CommentsController < ApplicationController
   def destroy
     @comment = Comment.find(params[:id])
     @comment.destroy
-    redirect_to toy_path(@toy), notice: "Toy deleted successfully"
+    respond_to do |format|
+      format.js
+    end
   end
 
   private
