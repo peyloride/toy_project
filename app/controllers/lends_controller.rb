@@ -1,6 +1,6 @@
 class LendsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_toy
+  before_action :set_toy, only: [:lend_request, :accept, :refuse]
   before_action :set_lend, only: [:accept, :refuse]
 
   def lend_request
