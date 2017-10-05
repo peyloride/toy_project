@@ -8,15 +8,8 @@
         <p class="card-text"><%= toy.description[0..100] + "..."%></p>
         <p class="text-right">
           <i class="fa fa-comment" aria-hidden="true"></i>
-              <%= toy.comments.size %>
-          <% if current_user.voted_for? toy %>
-            <i class="fa fa-heart" aria-hidden="true"></i>
-          <% else %>
-            <%= link_to toy_like_path(toy), method: :post do %>
-              <i class="fa fa-heart-o" aria-hidden="true"></i>
-            <% end %>
-          <% end %>
-            <%= toy.get_likes.size %>
+            <%= toy.comments.size %>
+            <%= render 'toys/shared/likes', toy: toy  %>
         </p>
       </div>
       <div class="card-footer">

@@ -9,7 +9,9 @@ class ToysController < ApplicationController
   def like
     @toy = Toy.find(params[:toy_id])
     current_user.likes @toy
-    redirect_back(fallback_location: root_path)
+    respond_to do |format|
+      format.js
+    end
   end
 
   def my_toys

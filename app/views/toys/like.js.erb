@@ -1,0 +1,2 @@
+$(".likes-section[data-id=<%= @toy.id %>]").hide();
+$(".likes-section[data-id=<%= @toy.id %>]").html("<%= j render 'toys/shared/likes', toy: @toy %>").fadeIn(1000);
