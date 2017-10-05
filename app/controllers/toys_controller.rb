@@ -3,7 +3,7 @@ class ToysController < ApplicationController
   before_action :set_toy, only: [:edit, :update, :destroy]
 
   def index
-    @toys = Toy.all
+    @toys = Toy.order('id DESC')
   end
 
   def like
@@ -22,10 +22,10 @@ class ToysController < ApplicationController
   def show
     @toy = Toy.find(params[:id])
     @lends = Lend.where(toy_id: @toy.id, is_accepted: nil)
+    @lend = Lend.find_by(toy_id: @toy.id, is_accepted: true)
 
-    if Lend.find_by(toy_id: @toy.id, is_accepted: true).present?
+    if @lend.present?
       @lender = Lend.find_by(toy_id: @toy.id, is_accepted: true).lender
-      @lend = Lend.find_by(toy_id: @toy.id, is_accepted: true)
     end
   end
 
